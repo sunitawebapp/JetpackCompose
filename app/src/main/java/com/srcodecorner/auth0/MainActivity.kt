@@ -1,29 +1,36 @@
 package com.srcodecorner.auth0
 
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
+import android.view.View.OnClickListener
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement.Top
+import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerIcon
-import androidx.compose.ui.layout.VerticalAlignmentLine
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.srcodecorner.auth0.ui.components.*
 import com.srcodecorner.auth0.ui.theme.Auth0Theme
-import java.time.format.TextStyle
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,11 +39,14 @@ class MainActivity : ComponentActivity() {
             Auth0Theme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = Color.Yellow
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.White)
+                        .padding(20.dp)
                 ) {
                     DefaultPreview()
                 }
+
             }
         }
     }
@@ -44,61 +54,174 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun LoginField(){
-    Column(
-        Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Icon()
-        Spacer(modifier = Modifier.size(40.dp))  // How to set the modifier
-        inputField("User Name")
-        inputField("Password")
-        Spacer(modifier = Modifier.size(40.dp))  // How to set the modifier
-        ButtonComponent("Login")
+fun RegistrationScreen() {
+    Column(Modifier.fillMaxSize()) {
+
+        HeadingTextComponent(value = stringResource(R.string.sign_up))
+        NormalTextComponent(value = stringResource(R.string.create_your_account))
+        TextFieldComponent(labelValue = stringResource(id = R.string.username))
+        SpacerComponent(10)
+        TextFieldComponent(labelValue = stringResource(id = R.string.email))
+        SpacerComponent(10)
+        TextFieldComponent(labelValue = stringResource(id = R.string.password))
+        SpacerComponent(10)
+        TextFieldComponent(labelValue = stringResource(id = R.string.confirm_password))
+        SpacerComponent(50)
+        //ButtonComponent(value = stringResource(id = R.string.sign_up))
+        SpacerComponent(20)
+        NormalTextComponent(value = stringResource(R.string.or))
+        SpacerComponent(20)
+        NormalTextComponent(value = stringResource(R.string.have_account_signin))
     }
+
 }
+
+
 @Composable
-fun inputField(lebel : String){
-    var text by remember { mutableStateOf("") }
-    OutlinedTextField(
-        value = text,
-        onValueChange = { newtext->
-            text= newtext
-        },
-        label = { Text(lebel)},
-        placeholder = { Text(text = lebel) },
-        )
+fun LoginScreen(navController: NavHostController) {
+    Column(modifier = Modifier.fillMaxSize()) {
+        HeadingTextComponent(value = stringResource(id = R.string.welcome_back))
+        TextFieldComponent(labelValue = stringResource(id = R.string.username))
+        TextFieldComponent(labelValue = stringResource(id = R.string.password))
+        ButtonComponent(value = stringResource(id = R.string.signin),
+            onclick = { navController.navigate(Screens.Registration.route) })
+    }
+
+}
+
+
+@Composable
+fun ForgotPasswordScreen() {
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        HeadingTextComponent(value = stringResource(R.string.forgot_password))
+        TextFieldComponent(labelValue = stringResource(R.string.enter_email))
+        ButtonComponent(value = stringResource(R.string.send)) {
+
+        }
+    }
+
+}
+
+
+@Composable
+fun VerificationScreen() {
+    Column(modifier = Modifier.fillMaxSize()) {
+        HeadingTextComponent(value = stringResource(id = R.string.verification))
+        NormalTextComponent(value = stringResource(id = R.string.enter_verification))
+        SpacerComponent(20)
+        Row(
+            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly,
+        ) {
+            TextFieldBorder()
+            TextFieldBorder()
+            TextFieldBorder()
+            TextFieldBorder()
+        }
+        SpacerComponent(20)
+        ButtonComponent(value = stringResource(id = R.string.send)) {
+
+        }
+    }
+
+
 }
 
 @Composable
-fun Icon(){
-    Image(painter = painterResource(id = R.drawable.login_icon),
-        contentDescription ="" ,
-        modifier = Modifier.size(100.dp)
+fun NewPasswordScreen(){
+    Column(modifier = Modifier.fillMaxWidth()) {
+        HeadingTextComponent(value = stringResource(id = R.string.new_password))
+        SpacerComponent(20)
+        TextFieldComponent(labelValue = stringResource(id = R.string.new_password))
+        SpacerComponent(20)
+        TextFieldComponent(labelValue = stringResource(id = R.string.confirm_password))
+        SpacerComponent(20)
+        ButtonComponent(value = stringResource(id = R.string.send)) {
+
+        }
+    }
+
+}
+
+
+@Composable
+fun TextFieldBorder() {
+    val maxChar = 1
+    var text by remember { mutableStateOf("") }
+    TextField(
+        value = text,
+        onValueChange = {if (it.length <= maxChar)  text = it },
+        Modifier
+            .border(BorderStroke(1.dp, Color.Red), RectangleShape)
+            .size(50.dp)
+            .width(1.dp),
+        placeholder ={Text(text = "X")} ,
+        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+        textStyle = TextStyle(textAlign = TextAlign.Center)
     )
 }
 
+
 @Composable
-fun ButtonComponent(value : String){
-  Button(onClick = {  }) {
-      Text(text = value)
-  }
+fun BoxComponent() {
+    Box(
+        modifier = Modifier
+            .size(50.dp)
+            .clip(RectangleShape)
+            .background(Color.White)
+            .border(2.dp, Color.Red)
+    )
+}
+
+
+@Composable
+fun SplashScreen() {
+    Column(modifier = Modifier.fillMaxSize()) {
+
+    }
+}
+
+
+@Composable
+fun ScreenMain() {
+    val navcontroller = rememberNavController()
+    NavGraph(navcontroller)
 }
 
 @Composable
-fun BackgroundImg(){
-    var modifier = Modifier.fillMaxSize().background(Color.Green)
+fun NavGraph(navController: NavHostController) {
+    NavHost(
+        navController = navController, startDestination = Screens.Login.route
+    ) {
+        composable(route = Screens.Login.route) {
+            LoginScreen(navController)
+        }
+        composable(route = Screens.Registration.route) {
+            RegistrationScreen()
+        }
 
+    }
 }
+
+
+
+
+
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     Auth0Theme {
-      //  Greeting("Android")
-        BackgroundImg()
-        LoginField()
+        //  Greeting("Android")
 
+        //  LoginScreen()
+        // RegistrationScreen()
+        //SplashScreen()
+        // ScreenMain()
+        //ForgotPasswordScreen()
+        VerificationScreen()
+        // BoxComponent()
+      //  NewPasswordScreen()
     }
+
 }

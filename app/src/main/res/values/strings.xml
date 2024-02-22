@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Auth0</string>
+    <string name="create_your_account">Create Your Account</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signin_google">Sign in With Google</string>
+    <string name="signin">Sign In</string>
+    <string name="do_forgot_password">Forgot Password?</string>
+    <string name="have_account_signup">Dont have an account? Sign Up</string>
+    <string name="have_account_signin">Already have an account? Sign In</string>
+    <string name="or">Or</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="enter_email">Enter Email Address</string>
+    <string name="send">Send</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="verification">Verification</string>
+    <string name="enter_verification">Enter Verification Code</string>
+    <string name="enter_new_password">Enter New Password</string>
+    <string name="new_password">New Password</string>
+
+
 </resources>

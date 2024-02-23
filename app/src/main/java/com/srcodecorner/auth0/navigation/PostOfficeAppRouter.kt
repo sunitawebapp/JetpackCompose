@@ -10,6 +10,7 @@ sealed class Screens (val route: String) {
     object ForgotPasswordScreen : Screens("ForgotPasswordScreen")
     object VerificationScreen : Screens("VerificationScreen")
     object NewPasswordScreen : Screens("NewPasswordScreen")
+    object HomeScreen : Screens("HomeScreen")
 
 }
 object PostOfficeAppRouter {

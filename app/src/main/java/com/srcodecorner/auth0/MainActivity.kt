@@ -29,7 +29,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.srcodecorner.auth0.ui.components.*
+import com.srcodecorner.auth0.components.*
+import com.srcodecorner.auth0.navigation.Screens
+
 import com.srcodecorner.auth0.ui.theme.Auth0Theme
 
 class MainActivity : ComponentActivity() {
@@ -84,7 +86,7 @@ fun LoginScreen(navController: NavHostController) {
         TextFieldComponent(labelValue = stringResource(id = R.string.username))
         TextFieldComponent(labelValue = stringResource(id = R.string.password))
         ButtonComponent(value = stringResource(id = R.string.signin),
-            onclick = { navController.navigate(Screens.Registration.route) })
+            onclick = { navController.navigate(Screens.RegistrationScreen.route) })
     }
 
 }
@@ -191,12 +193,12 @@ fun ScreenMain() {
 @Composable
 fun NavGraph(navController: NavHostController) {
     NavHost(
-        navController = navController, startDestination = Screens.Login.route
+        navController = navController, startDestination = Screens.LoginScreen.route
     ) {
-        composable(route = Screens.Login.route) {
+        composable(route = Screens.LoginScreen.route) {
             LoginScreen(navController)
         }
-        composable(route = Screens.Registration.route) {
+        composable(route = Screens.RegistrationScreen.route) {
             RegistrationScreen()
         }
 

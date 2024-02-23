@@ -1,4 +1,4 @@
-package com.srcodecorner.auth0.ui.components
+package com.srcodecorner.auth0.components
 
 import android.util.Log
 import android.view.View

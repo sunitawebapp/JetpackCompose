@@ -27,15 +27,11 @@ fun NavigationGraph(
             SignUpScreen()
         }
         composable(route = Screen.HomeScreen.route) {
-         //   HomeScreen()
+            HomeScreen()
         }
 
     }
 
 }
 
-@Preview
-@Composable
-fun PreviewOfNavigationGraph(){
-    NavigationGraph()
-}
+

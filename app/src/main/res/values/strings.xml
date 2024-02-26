@@ -20,6 +20,9 @@
     <string name="enter_verification">Enter Verification Code</string>
     <string name="enter_new_password">Enter New Password</string>
     <string name="new_password">New Password</string>
+    <string name="sign_to_continue">Sign to Continue</string>
+
+
 
 
 </resources>

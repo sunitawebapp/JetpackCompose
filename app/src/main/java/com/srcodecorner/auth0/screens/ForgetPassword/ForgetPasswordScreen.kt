@@ -10,13 +10,16 @@ import com.srcodecorner.auth0.R
 import com.srcodecorner.auth0.components.ButtonComponent
 import com.srcodecorner.auth0.components.HeadingTextComponent
 import com.srcodecorner.auth0.components.TextFieldComponent
+import com.srcodecorner.auth0.screens.auth.ForgetPassword.viewmodel.ForgetPasswordViewModel
 
 
 @Composable
 fun ForgetPasswordScreen() {
+    var forgetpasswordviewmodel = ForgetPasswordViewModel()
+   var email = forgetpasswordviewmodel.email.value
     Column(modifier = Modifier.fillMaxSize()) {
         HeadingTextComponent(value = stringResource(R.string.forgot_password))
-        TextFieldComponent(labelValue = stringResource(R.string.enter_email))
+        TextFieldComponent(labelValue = stringResource(R.string.enter_email),email, onValueChange = {})
         ButtonComponent(value = stringResource(R.string.send)) {
 
         }

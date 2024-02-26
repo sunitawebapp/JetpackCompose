@@ -1,36 +1,42 @@
 package com.srcodecorner.auth0.screens.auth.SignIn.viewmodel
 
-import android.util.Log
-import android.widget.Toast
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-
-import com.srcodecorner.auth0.R
-import com.srcodecorner.auth0.navigation.Screens
+import com.srcodecorner.auth0.utils.Helper
 
 class SignInViewModel : ViewModel(){
-    val TAG= javaClass.simpleName
-    var emailState = mutableStateOf("")
+    var uiEventLiveData : MutableLiveData<String> = MutableLiveData()
+
+     val emailState = mutableStateOf("")
     var passwordState = mutableStateOf("")
+
+    fun setemail(email: String){
+        emailState.value =  email
+    }
+    fun setpassword(password: String){
+        passwordState.value =  password
+    }
 
     //User click on Login Button
     fun userSignin(navController : NavController){
-    //  navController.navigate(Screens.HomeScreen.route)
+        isValidate()
     }
 
-
-    //navigate sign up
-    fun navigateSignUp(navController : NavController){
-      //   navController.navigate(Screens.RegistrationScreen.route)
-    }
 
     fun isValidate(): Boolean{
-        if(emailState.value.equals("")){
-            Log.d(TAG, "isValidate: ")
-        }
+       if(emailState.value.isEmpty()) updateData("Enter Email Address")
+       else if(!Helper.checkEmail(emailState.value)) updateData("Please enter vaild email address")
+       else if(passwordState.value.isEmpty()) updateData("Enter Password")
+       else updateData("")
         return false
     }
+    // Function to update data
+    fun updateData(newData: String) {
+        uiEventLiveData.value = newData
+    }
+
+
+
 }

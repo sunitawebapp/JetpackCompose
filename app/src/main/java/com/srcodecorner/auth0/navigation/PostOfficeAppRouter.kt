@@ -4,13 +4,23 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 
 
-sealed class Screens (val route: String) {
-    object LoginScreen : Screens("LoginScreen")
-    object RegistrationScreen : Screens("RegistrationScreen")
-    object ForgotPasswordScreen : Screens("ForgotPasswordScreen")
-    object VerificationScreen : Screens("VerificationScreen")
-    object NewPasswordScreen : Screens("NewPasswordScreen")
-    object HomeScreen : Screens("HomeScreen")
+sealed class Screens () {
+    object LoginScreen : Screens()
+    object RegistrationScreen : Screens()
+    object ForgotPasswordScreen : Screens()
+    object VerificationScreen : Screens()
+    object NewPasswordScreen : Screens()
+    object HomeScreen : Screens()
+
+}
+
+sealed class Screen (var route : String) {
+    object LoginScreen : Screen("LoginScreen")
+    object RegistrationScreen : Screen("RegistrationScreen")
+    object ForgotPasswordScreen : Screen("ForgotPasswordScreen")
+    object VerificationScreen : Screen("VerificationScreen")
+    object NewPasswordScreen : Screen("NewPasswordScreen")
+    object HomeScreen : Screen("HomeScreen")
 
 }
 object PostOfficeAppRouter {

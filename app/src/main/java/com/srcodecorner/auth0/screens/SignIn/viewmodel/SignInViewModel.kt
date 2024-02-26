@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.srcodecorner.auth0.NavGraph
+
 import com.srcodecorner.auth0.R
 import com.srcodecorner.auth0.navigation.Screens
 
@@ -18,13 +18,13 @@ class SignInViewModel : ViewModel(){
 
     //User click on Login Button
     fun userSignin(navController : NavController){
-      navController.navigate(Screens.HomeScreen.route)
+    //  navController.navigate(Screens.HomeScreen.route)
     }
 
 
     //navigate sign up
     fun navigateSignUp(navController : NavController){
-         navController.navigate(Screens.RegistrationScreen.route)
+      //   navController.navigate(Screens.RegistrationScreen.route)
     }
 
     fun isValidate(): Boolean{

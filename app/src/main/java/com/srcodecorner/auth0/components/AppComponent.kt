@@ -50,9 +50,9 @@ fun SpacerComponent(size: Int) {
 }
 
 @Composable
-fun TextFieldComponent(labelValue: String, getValue : String) {
+fun TextFieldComponent(labelValue: String) {
     var text by remember { mutableStateOf("") }
-    text = getValue
+
     TextField(
         value = text,
         placeholder =  { Text(text = labelValue) },

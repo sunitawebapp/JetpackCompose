@@ -12,11 +12,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.srcodecorner.auth0.R
 import com.srcodecorner.auth0.components.*
+import com.srcodecorner.auth0.navigation.NavigationGraph
+import com.srcodecorner.auth0.navigation.PostOfficeAppRouter
+import com.srcodecorner.auth0.navigation.Screen
 import com.srcodecorner.auth0.navigation.Screens
 import com.srcodecorner.auth0.screens.auth.SignIn.viewmodel.SignInViewModel
 
 @Composable
-fun SignInScreen(navController : NavController) {
+fun SignInScreen(navController: NavController) {
 
    val signInViewModel : SignInViewModel = viewModel()
     var emailState = signInViewModel.emailState.value
@@ -40,14 +43,16 @@ fun SignInScreen(navController : NavController) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         HeadingTextComponent(value = stringResource(id = R.string.welcome_back))
-        TextFieldComponent(labelValue = stringResource(id = R.string.username),emailState)
-        TextFieldComponent(labelValue = stringResource(id = R.string.password),passwordState)
+        TextFieldComponent(labelValue = stringResource(id = R.string.username))
+        TextFieldComponent(labelValue = stringResource(id = R.string.password))
         ButtonComponent(value = stringResource(id = R.string.signin),
-            onclick = { signInViewModel.userSignin(navController)}
+            onclick = {
+                navController.navigate(Screen.RegistrationScreen.route)
+            }
          )
     //    TextButtonComponent(value = stringResource(id = R.string.have_account_signup))
 
-        TextButton(onClick = { signInViewModel.navigateSignUp(navController) }) {
+        TextButton(onClick = { PostOfficeAppRouter.navigateTo(Screens.RegistrationScreen) }) {
             NormalTextComponent(value = stringResource(id = R.string.have_account_signup))
         }
     }

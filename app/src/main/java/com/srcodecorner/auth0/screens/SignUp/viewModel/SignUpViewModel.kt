@@ -9,10 +9,10 @@ class SignUpViewModel : ViewModel(){
 
 
     fun userSignUp(navController: NavController){
-        navController.navigate(Screens.HomeScreen.route)
+       // navController.navigate(Screens.HomeScreen.route)
     }
 
     fun navigateSignIn(navController: NavController){
-        navController.navigate(Screens.LoginScreen.route)
+       // navController.navigate(Screens.LoginScreen.route)
     }
 }

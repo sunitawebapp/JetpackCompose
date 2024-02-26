@@ -10,11 +10,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.srcodecorner.auth0.R
 import com.srcodecorner.auth0.components.*
+import com.srcodecorner.auth0.navigation.PostOfficeAppRouter
+import com.srcodecorner.auth0.navigation.Screens
 import com.srcodecorner.auth0.screens.auth.SignIn.SignInScreen
 import com.srcodecorner.auth0.screens.auth.SignUp.ViewModel.SignUpViewModel
 
 @Composable
-fun SignUpScreen(navController: NavController) {
+fun SignUpScreen() {
 
     val signUpViewModel : SignUpViewModel = SignUpViewModel()
 
@@ -48,13 +50,13 @@ fun SignUpScreen(navController: NavController) {
         SpacerComponent(10)
         TextFieldComponent(labelValue = stringResource(id = R.string.confirm_password))
         SpacerComponent(50)
-        ButtonComponent(value = stringResource(id = R.string.sign_up), onclick = {signUpViewModel.userSignUp(navController)})
+        ButtonComponent(value = stringResource(id = R.string.sign_up), onclick = {PostOfficeAppRouter.navigateTo(Screens.LoginScreen)})
         SpacerComponent(20)
         NormalTextComponent(value = stringResource(R.string.or))
         SpacerComponent(20)
      //   NormalTextComponent(value = stringResource(R.string.have_account_signin))
 
-        TextButton(onClick = { signUpViewModel.navigateSignIn(navController) }) {
+        TextButton(onClick = { PostOfficeAppRouter.navigateTo(Screens.LoginScreen) }) {
             NormalTextComponent(value = stringResource(id = R.string.have_account_signin))
         }
     }

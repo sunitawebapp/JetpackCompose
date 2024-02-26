@@ -29,7 +29,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.srcodecorner.auth0.app.PostOfficeApp
 import com.srcodecorner.auth0.components.*
+import com.srcodecorner.auth0.navigation.NavigationGraph
 import com.srcodecorner.auth0.navigation.Screens
 import com.srcodecorner.auth0.screens.Home.HomeScreen
 import com.srcodecorner.auth0.screens.auth.SignIn.SignInScreen
@@ -67,33 +69,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ScreenMain() {
-    val navcontroller = rememberNavController()
-    NavGraph(navcontroller)
+    NavigationGraph()
 }
 
-@Composable
-fun NavGraph(navController: NavHostController) {
-    NavHost(
-        navController = navController, startDestination = Screens.LoginScreen.route
-    ) {
-        composable(route = Screens.LoginScreen.route) {
-            SignInScreen(navController)
-            //SignInScreen()
-        }
-        composable(route = Screens.RegistrationScreen.route) {
-            SignUpScreen(navController)
-        }
-        composable(route = Screens.HomeScreen.route) {
-            HomeScreen(navController)
-        }
 
-    }
-}
-
-@Composable
-fun navigate(){
-
-}
 
 
 
@@ -108,6 +87,7 @@ fun DefaultPreview() {
         // RegistrationScreen()
         //SplashScreen()
          ScreenMain()
+       // PostOfficeApp()
         //ForgotPasswordScreen()
         //VerificationScreen()
         // BoxComponent()

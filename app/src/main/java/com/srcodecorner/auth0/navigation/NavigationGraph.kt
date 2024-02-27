@@ -6,7 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.srcodecorner.auth0.screens.ForgetPassword.ForgetPasswordScreen
 import com.srcodecorner.auth0.screens.Home.HomeScreen
+import com.srcodecorner.auth0.screens.NewPasswordScreen.NewPasswordScreen
+import com.srcodecorner.auth0.screens.Verification.VerificationScreen
 import com.srcodecorner.auth0.screens.auth.SignIn.SignInScreen
 import com.srcodecorner.auth0.screens.auth.SignUp.SignUpScreen
 
@@ -24,10 +27,19 @@ fun NavigationGraph(
             //SignInScreen()
         }
         composable(route = Screen.RegistrationScreen.route) {
-            SignUpScreen()
+            SignUpScreen(navController)
         }
         composable(route = Screen.HomeScreen.route) {
-            HomeScreen()
+            HomeScreen(navController)
+        }
+        composable(route = Screen.ForgotPasswordScreen.route) {
+            ForgetPasswordScreen(navController)
+        }
+        composable(route = Screen.VerificationScreen.route) {
+            VerificationScreen(navController)
+        }
+        composable(route = Screen.NewPasswordScreen.route) {
+            NewPasswordScreen(navController)
         }
 
     }

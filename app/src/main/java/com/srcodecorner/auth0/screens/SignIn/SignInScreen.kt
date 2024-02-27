@@ -78,7 +78,13 @@ fun SignInScreen(navController: NavController) {
             }, Icons.Default.Lock
         )
         SpacerComponent(10)
-        NormalTextComponent(value = stringResource(id = R.string.do_forgot_password), TextAlign.End)
+
+        TextButton(onClick = { navController.navigate(Screen.ForgotPasswordScreen.route) }) {
+            NormalTextComponent(
+                value = stringResource(id = R.string.do_forgot_password),
+                TextAlign.End
+            )
+        }
         SpacerComponent(50)
         ButtonComponent(value = stringResource(id = R.string.signin),
             onclick = {

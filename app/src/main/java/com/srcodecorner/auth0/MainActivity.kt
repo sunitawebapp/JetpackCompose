@@ -38,7 +38,7 @@ import com.srcodecorner.auth0.screens.auth.SignIn.SignInScreen
 import com.srcodecorner.auth0.screens.auth.SignUp.SignUpScreen
 
 import com.srcodecorner.auth0.ui.theme.Auth0Theme
-
+//
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                         .background(Color.White)
                         .padding(20.dp)
                 ) {
-                    DefaultPreview()
+                    ScreenMain()
                 }
 
             }
@@ -60,38 +60,18 @@ class MainActivity : ComponentActivity() {
 }
 
 
-
-
-
-
-
-
-
 @Composable
 fun ScreenMain() {
     NavigationGraph()
 }
 
 
-
-
-
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     Auth0Theme {
-        //  Greeting("Android")
+        ScreenMain()
 
-        //  LoginScreen()
-        // RegistrationScreen()
-        //SplashScreen()
-         ScreenMain()
-       // PostOfficeApp()
-        //ForgotPasswordScreen()
-        //VerificationScreen()
-        // BoxComponent()
-      //  NewPasswordScreen()
     }
 
 }

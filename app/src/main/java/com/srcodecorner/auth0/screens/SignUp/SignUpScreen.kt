@@ -25,7 +25,7 @@ import com.srcodecorner.auth0.screens.auth.SignIn.viewmodel.SignInViewModel
 import com.srcodecorner.auth0.screens.auth.SignUp.ViewModel.SignUpViewModel
 
 @Composable
-fun SignUpScreen() {
+fun SignUpScreen(navController: NavController) {
 
     val signUpViewModel = SignUpViewModel()
 

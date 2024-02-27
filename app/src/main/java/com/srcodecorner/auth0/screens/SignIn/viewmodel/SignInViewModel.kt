@@ -8,9 +8,8 @@ import com.srcodecorner.auth0.utils.Helper
 
 class SignInViewModel : ViewModel(){
     var uiEventLiveData : MutableLiveData<String> = MutableLiveData()
-
-     val emailState = mutableStateOf("")
-    var passwordState = mutableStateOf("")
+    val emailState = mutableStateOf("")
+    val passwordState = mutableStateOf("")
 
     fun setemail(email: String){
         emailState.value =  email

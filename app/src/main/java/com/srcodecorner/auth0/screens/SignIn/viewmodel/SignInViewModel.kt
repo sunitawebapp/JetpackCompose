@@ -21,7 +21,10 @@ class SignInViewModel : ViewModel(){
 
     //User click on Login Button
     fun userSignin(navController : NavController){
-        isValidate()
+        if (isValidate()){
+
+        }
+
     }
 
 
@@ -29,7 +32,10 @@ class SignInViewModel : ViewModel(){
        if(emailState.value.isEmpty()) updateData("Enter Email Address")
        else if(!Helper.checkEmail(emailState.value)) updateData("Please enter vaild email address")
        else if(passwordState.value.isEmpty()) updateData("Enter Password")
-       else updateData("")
+       else {
+           updateData("")
+           return true
+       }
         return false
     }
     // Function to update data

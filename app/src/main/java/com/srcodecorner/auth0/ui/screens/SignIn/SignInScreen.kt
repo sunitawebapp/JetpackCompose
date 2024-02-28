@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TextField
@@ -38,16 +39,13 @@ import com.srcodecorner.auth0.utils.Helper.showToast
 
 @Composable
 fun SignInScreen(navController: NavController) {
-    var TAG = "SignInScreen"
     val signInViewModel: SignInViewModel = viewModel()
-    var emailState = signInViewModel.emailState.value
-    var passwordState = signInViewModel.passwordState.value
+
     val context = LocalContext.current.applicationContext
-    var email by remember { mutableStateOf(emailState) }
-    var password by remember { mutableStateOf(passwordState) }
 
-    val uiEventState = signInViewModel.uiEventLiveData.observeAsState()
-
+    var signInState by remember {
+        signInViewModel.signInState
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -62,21 +60,29 @@ fun SignInScreen(navController: NavController) {
         SpacerComponent(60)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.email),
-            value = email,
+            value = signInState.emailState,
             onValueChange = {
-                email = it
-                signInViewModel.setemail(it)
-            }, Icons.Default.Email
+               signInViewModel.signInState.value = signInState.copy(
+                   emailState = it
+               )
+
+            }, Icons.Default.Email,
+           isError = signInState.SignInStateError.emailStateError,
+            errorText =signInState.SignInStateError.emailError
         )
         SpacerComponent(10)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.password),
-            value = password,
+            value = signInState.passwordState,
             onValueChange = {
-                password = it
-                signInViewModel.setpassword(it)
-            }, Icons.Default.Lock
+                signInViewModel.signInState.value = signInState.copy(passwordState = it)
+            }, Icons.Default.Lock,
+            isError = signInState.SignInStateError.passwordStateError,
+            errorText =""
         )
+
+
+
         SpacerComponent(10)
 
         TextButton(onClick = { navController.navigate(Screen.ForgotPasswordScreen.route) }) {
@@ -88,12 +94,11 @@ fun SignInScreen(navController: NavController) {
         SpacerComponent(50)
         ButtonComponent(value = stringResource(id = R.string.signin),
             onclick = {
-                signInViewModel.userSignin(navController)
-                uiEventState.value?.let {
-                    if (it.isNotEmpty()) {
-                        showToast(context, it)
-                    } else navController.navigate(Screen.HomeScreen.route)
-                }
+               if (signInViewModel.isValidateUserSignIn()){
+                   navController.navigate(Screen.HomeScreen.route)
+               }else{
+                   Log.d("djikfh", "SignInScreen: "+signInState.SignInStateError.emailStateError)
+               }
             }
         )
         //    TextButtonComponent(value = stringResource(id = R.string.have_account_signup))

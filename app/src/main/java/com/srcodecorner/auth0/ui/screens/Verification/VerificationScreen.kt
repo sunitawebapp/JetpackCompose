@@ -1,4 +1,4 @@
-package com.srcodecorner.auth0.screens.Verification
+package com.srcodecorner.auth0.ui.screens.Verification
 
 import android.util.Log
 import androidx.compose.animation.core.Animatable
@@ -32,7 +32,7 @@ import androidx.navigation.NavController
 import com.srcodecorner.auth0.R
 import com.srcodecorner.auth0.components.*
 import com.srcodecorner.auth0.navigation.Screen
-import com.srcodecorner.auth0.screens.ForgetPassword.ForgetPasswordScreen
+import com.srcodecorner.auth0.ui.screens.ForgetPassword.ForgetPasswordScreen
 
 @Composable
 fun VerificationScreen(navController: NavController) {

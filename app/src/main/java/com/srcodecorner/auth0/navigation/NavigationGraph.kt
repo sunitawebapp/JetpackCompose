@@ -6,10 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.srcodecorner.auth0.screens.ForgetPassword.ForgetPasswordScreen
-import com.srcodecorner.auth0.screens.Home.HomeScreen
-import com.srcodecorner.auth0.screens.NewPasswordScreen.NewPasswordScreen
-import com.srcodecorner.auth0.screens.Verification.VerificationScreen
+import com.srcodecorner.auth0.ui.screens.ForgetPassword.ForgetPasswordScreen
+import com.srcodecorner.auth0.ui.screens.Home.HomeScreen
+import com.srcodecorner.auth0.ui.screens.NewPasswordScreen.NewPasswordScreen
+import com.srcodecorner.auth0.ui.screens.Verification.VerificationScreen
 import com.srcodecorner.auth0.screens.auth.SignIn.SignInScreen
 import com.srcodecorner.auth0.screens.auth.SignUp.SignUpScreen
 

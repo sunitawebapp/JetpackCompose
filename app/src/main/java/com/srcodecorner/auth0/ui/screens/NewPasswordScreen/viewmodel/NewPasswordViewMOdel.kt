@@ -1,4 +1,4 @@
-package com.srcodecorner.auth0.screens.NewPasswordScreen.viewmodel
+package com.srcodecorner.auth0.ui.screens.NewPasswordScreen.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel

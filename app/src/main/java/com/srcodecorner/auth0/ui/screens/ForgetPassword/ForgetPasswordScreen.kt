@@ -1,4 +1,4 @@
-package com.srcodecorner.auth0.screens.ForgetPassword
+package com.srcodecorner.auth0.ui.screens.ForgetPassword
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,8 +15,8 @@ import androidx.navigation.NavController
 import com.srcodecorner.auth0.R
 import com.srcodecorner.auth0.components.*
 import com.srcodecorner.auth0.navigation.Screen
-import com.srcodecorner.auth0.screens.NewPasswordScreen.NewPasswordScreen
-import com.srcodecorner.auth0.screens.Verification.VerificationScreen
+import com.srcodecorner.auth0.ui.screens.NewPasswordScreen.NewPasswordScreen
+import com.srcodecorner.auth0.ui.screens.Verification.VerificationScreen
 import com.srcodecorner.auth0.screens.auth.ForgetPassword.viewmodel.ForgetPasswordViewModel
 
 
@@ -30,7 +30,7 @@ fun ForgetPasswordScreen(navController: NavController) {
     verticalArrangement = Arrangement.Center) {
         HeadingTextComponent(value = stringResource(R.string.forgot_password))
         SpacerComponent(size = 20)
-        OutlineTextFieldIconCompent(labelValue = stringResource(R.string.enter_email),email, onValueChange = {},Icons.Default.Email)
+        OutlineTextFieldIconCompent(labelValue = stringResource(R.string.enter_email),email, onValueChange = {},Icons.Default.Email,false,  errorText ="")
         SpacerComponent(size = 50)
         ButtonComponent(value = stringResource(R.string.send)) {
           navController.navigate(Screen.VerificationScreen.route)

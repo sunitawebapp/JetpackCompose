@@ -33,7 +33,7 @@ import com.srcodecorner.auth0.app.PostOfficeApp
 import com.srcodecorner.auth0.components.*
 import com.srcodecorner.auth0.navigation.NavigationGraph
 import com.srcodecorner.auth0.navigation.Screens
-import com.srcodecorner.auth0.screens.Home.HomeScreen
+import com.srcodecorner.auth0.ui.screens.Home.HomeScreen
 import com.srcodecorner.auth0.screens.auth.SignIn.SignInScreen
 import com.srcodecorner.auth0.screens.auth.SignUp.SignUpScreen
 

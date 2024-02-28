@@ -1,4 +1,4 @@
-package com.srcodecorner.auth0.screens.NewPasswordScreen
+package com.srcodecorner.auth0.ui.screens.NewPasswordScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,7 @@ import com.srcodecorner.auth0.components.ButtonComponent
 import com.srcodecorner.auth0.components.HeadingTextComponent
 import com.srcodecorner.auth0.components.SpacerComponent
 import com.srcodecorner.auth0.components.TextFieldComponent
-import com.srcodecorner.auth0.screens.NewPasswordScreen.viewmodel.NewPasswordViewModel
+import com.srcodecorner.auth0.ui.screens.NewPasswordScreen.viewmodel.NewPasswordViewModel
 
 @Composable
 fun NewPasswordScreen(navController: NavController) {

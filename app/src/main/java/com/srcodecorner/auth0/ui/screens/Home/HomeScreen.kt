@@ -1,4 +1,4 @@
-package com.srcodecorner.auth0.screens.Home
+package com.srcodecorner.auth0.ui.screens.Home
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

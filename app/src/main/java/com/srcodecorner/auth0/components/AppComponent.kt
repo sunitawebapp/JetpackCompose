@@ -75,14 +75,25 @@ fun OutlineTextFieldCompent(labelValue: String, value: String, onValueChange: (S
 }
 
 @Composable
-fun OutlineTextFieldIconCompent(labelValue: String, value: String, onValueChange: (String) -> Unit, icon : ImageVector){
+fun OutlineTextFieldIconCompent(labelValue: String, value: String, onValueChange: (String) -> Unit, icon : ImageVector,isError: Boolean, errorText: String){
     OutlinedTextField(value = value,
         onValueChange = onValueChange,
         placeholder =  {Text(text = labelValue)},
         label = {Text(text = labelValue)},
         modifier = Modifier.fillMaxWidth(),
-        leadingIcon = { Icon(imageVector = icon, contentDescription = "") }
+        leadingIcon = { Icon(imageVector = icon, contentDescription = "") },
+        isError = isError
     )
+
+    if (isError) {
+        Text(
+            text = errorText,
+            style = MaterialTheme.typography.body2,
+            color = MaterialTheme.colors.error,
+            textAlign = TextAlign.End,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
 }
 
 

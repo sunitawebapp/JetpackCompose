@@ -44,28 +44,36 @@ fun SignUpScreen(navController: NavController) {
             labelValue = stringResource(id = R.string.username),
             value = name,
             onValueChange = {},
-            icon = Icons.Default.Person
+            icon = Icons.Default.Person,
+            false,
+            errorText =""
         )
         SpacerComponent(10)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.email),
             value = email,
             onValueChange = {},
-            icon = Icons.Default.Email
+            icon = Icons.Default.Email,
+            false,
+            errorText =""
         )
         SpacerComponent(10)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.password),
             value = password,
             onValueChange = {},
-            icon = Icons.Default.Lock
+            icon = Icons.Default.Lock,
+            false,
+            errorText =""
         )
         SpacerComponent(10)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.confirm_password),
             value = conformpassword,
             onValueChange = {},
-            icon = Icons.Default.Lock
+            icon = Icons.Default.Lock,
+            false,
+            errorText =""
         )
         SpacerComponent(50)
         ButtonComponent(

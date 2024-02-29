@@ -35,6 +35,7 @@ import com.srcodecorner.auth0.navigation.Screens
 import com.srcodecorner.auth0.screens.auth.SignIn.viewmodel.SignInViewModel
 
 import com.srcodecorner.auth0.utils.Helper.showToast
+import com.srcodecorner.auth0.utils.SignInFormEvent
 
 
 @Composable
@@ -43,9 +44,7 @@ fun SignInScreen(navController: NavController) {
 
     val context = LocalContext.current.applicationContext
 
-    var signInState by remember {
-        signInViewModel.signInState
-    }
+    val signInState = signInViewModel.signInState
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -62,12 +61,13 @@ fun SignInScreen(navController: NavController) {
             labelValue = stringResource(id = R.string.email),
             value = signInState.emailState,
             onValueChange = {
-               signInViewModel.signInState.value = signInState.copy(
+              /* signInViewModel.signInState = signInState.copy(
                    emailState = it
-               )
+               )*/
+                            signInViewModel.onEvent(SignInFormEvent.EmailChanged(it))
 
             }, Icons.Default.Email,
-           isError = signInState.SignInStateError.emailStateError,
+           isError = signInViewModel.signInState.SignInStateError.emailStateError,
             errorText =signInState.SignInStateError.emailError
         )
         SpacerComponent(10)
@@ -75,9 +75,9 @@ fun SignInScreen(navController: NavController) {
             labelValue = stringResource(id = R.string.password),
             value = signInState.passwordState,
             onValueChange = {
-                signInViewModel.signInState.value = signInState.copy(passwordState = it)
+                signInViewModel.signInState = signInState.copy(passwordState = it)
             }, Icons.Default.Lock,
-            isError = signInState.SignInStateError.passwordStateError,
+            isError = signInViewModel.signInState.SignInStateError.passwordStateError,
             errorText =""
         )
 
@@ -94,11 +94,16 @@ fun SignInScreen(navController: NavController) {
         SpacerComponent(50)
         ButtonComponent(value = stringResource(id = R.string.signin),
             onclick = {
-               if (signInViewModel.isValidateUserSignIn()){
+
+
+             /*  if (signInViewModel.isValidateUserSignIn()){
                    navController.navigate(Screen.HomeScreen.route)
                }else{
                    Log.d("djikfh", "SignInScreen: "+signInState.SignInStateError.emailStateError)
                }
+*/
+                signInViewModel.onEvent(SignInFormEvent.Submit)
+
             }
         )
         //    TextButtonComponent(value = stringResource(id = R.string.have_account_signup))

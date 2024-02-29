@@ -5,18 +5,23 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.srcodecorner.auth0.navigation.Screens
+import com.srcodecorner.auth0.ui.screens.SignIn.state.SignInState
+import com.srcodecorner.auth0.ui.screens.SignUp.state.SignUpState
 
 class SignUpViewModel : ViewModel(){
-    var name = mutableStateOf("")
-    var email = mutableStateOf("")
-    var password = mutableStateOf("")
-    var confirmPassword = mutableStateOf("")
 
-    fun userSignUp(navController: NavController){
-       // navController.navigate(Screens.HomeScreen.route)
+
+    var signUpState = mutableStateOf(SignUpState())
+
+    fun uiEvent(){
+
     }
 
-    fun navigateSignIn(navController: NavController){
-       // navController.navigate(Screens.LoginScreen.route)
+    fun userSignUp(){
+
+    }
+
+    fun navigateSignIn(){
+
     }
 }

@@ -2,14 +2,8 @@ package com.srcodecorner.auth0.screens.auth.SignIn
 
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
-import androidx.compose.material.TextField
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
@@ -21,11 +15,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.srcodecorner.auth0.AppModule.provideNavigationRepository
 import com.srcodecorner.auth0.R
 import com.srcodecorner.auth0.components.*
 import com.srcodecorner.auth0.navigation.NavigationGraph
@@ -33,24 +29,28 @@ import com.srcodecorner.auth0.navigation.PostOfficeAppRouter
 import com.srcodecorner.auth0.navigation.Screen
 import com.srcodecorner.auth0.navigation.Screens
 import com.srcodecorner.auth0.screens.auth.SignIn.viewmodel.SignInViewModel
+import com.srcodecorner.auth0.ui.screens.SignIn.state.SignInState
 
 import com.srcodecorner.auth0.utils.Helper.showToast
-import com.srcodecorner.auth0.utils.SignInFormEvent
+import com.srcodecorner.auth0.ui.screens.SignIn.state.SignInFormEvent
+
 
 
 @Composable
 fun SignInScreen(navController: NavController) {
     val signInViewModel: SignInViewModel = viewModel()
 
-    val context = LocalContext.current.applicationContext
-
-    val signInState = signInViewModel.signInState
+    var signInState by remember {
+        signInViewModel.signInState
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center
     ) {
-
+        if (signInState.isLoginSuccessful){
+            navController.navigate(Screen.HomeScreen.route)
+        }
         HeadingTextComponent(value = stringResource(id = R.string.welcome_back))
         NormalTextComponent(
             value = stringResource(id = R.string.sign_to_continue),
@@ -61,26 +61,25 @@ fun SignInScreen(navController: NavController) {
             labelValue = stringResource(id = R.string.email),
             value = signInState.emailState,
             onValueChange = {
-              /* signInViewModel.signInState = signInState.copy(
-                   emailState = it
-               )*/
-                            signInViewModel.onEvent(SignInFormEvent.EmailChanged(it))
-
+                signInViewModel.onEvent(SignInFormEvent.EmailChanged(it))
             }, Icons.Default.Email,
-           isError = signInViewModel.signInState.SignInStateError.emailStateError,
-            errorText =signInState.SignInStateError.emailError
+            isError = signInState.emailStateError,
+            errorText = signInState.emailError
         )
+
+
         SpacerComponent(10)
+
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.password),
             value = signInState.passwordState,
             onValueChange = {
-                signInViewModel.signInState = signInState.copy(passwordState = it)
-            }, Icons.Default.Lock,
-            isError = signInViewModel.signInState.SignInStateError.passwordStateError,
-            errorText =""
-        )
+                signInViewModel.onEvent(SignInFormEvent.PasswordChanged(it))
 
+            }, Icons.Default.Lock,
+            isError = signInState.passwordStateError,
+            errorText = signInState.emailError
+        )
 
 
         SpacerComponent(10)
@@ -92,22 +91,15 @@ fun SignInScreen(navController: NavController) {
             )
         }
         SpacerComponent(50)
+
         ButtonComponent(value = stringResource(id = R.string.signin),
             onclick = {
 
-
-             /*  if (signInViewModel.isValidateUserSignIn()){
-                   navController.navigate(Screen.HomeScreen.route)
-               }else{
-                   Log.d("djikfh", "SignInScreen: "+signInState.SignInStateError.emailStateError)
-               }
-*/
                 signInViewModel.onEvent(SignInFormEvent.Submit)
+
 
             }
         )
-        //    TextButtonComponent(value = stringResource(id = R.string.have_account_signup))
-
 
         TextButton(onClick = { navController.navigate(Screen.RegistrationScreen.route) }) {
             NormalTextComponent(

@@ -10,6 +10,9 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -26,13 +29,13 @@ import com.srcodecorner.auth0.screens.auth.SignUp.ViewModel.SignUpViewModel
 
 @Composable
 fun SignUpScreen(navController: NavController) {
+    var signUpViewModel : SignUpViewModel= viewModel()
 
-    val signUpViewModel = SignUpViewModel()
 
-    var email = signUpViewModel.email.value
-    var password = signUpViewModel.password.value
-    var name = signUpViewModel.name.value
-    var conformpassword = signUpViewModel.confirmPassword.value
+   var signUpState by remember {
+      signUpViewModel.signUpState
+   }
+
 
 
     Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
@@ -42,7 +45,7 @@ fun SignUpScreen(navController: NavController) {
         SpacerComponent(30)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.username),
-            value = name,
+            value = signUpState.UsernameState,
             onValueChange = {},
             icon = Icons.Default.Person,
             false,
@@ -51,7 +54,7 @@ fun SignUpScreen(navController: NavController) {
         SpacerComponent(10)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.email),
-            value = email,
+            value = signUpState.emailState,
             onValueChange = {},
             icon = Icons.Default.Email,
             false,
@@ -60,7 +63,7 @@ fun SignUpScreen(navController: NavController) {
         SpacerComponent(10)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.password),
-            value = password,
+            value = signUpState.passwordState,
             onValueChange = {},
             icon = Icons.Default.Lock,
             false,
@@ -69,7 +72,7 @@ fun SignUpScreen(navController: NavController) {
         SpacerComponent(10)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.confirm_password),
-            value = conformpassword,
+            value = signUpState.confirmPasswordState,
             onValueChange = {},
             icon = Icons.Default.Lock,
             false,
@@ -78,7 +81,7 @@ fun SignUpScreen(navController: NavController) {
         SpacerComponent(50)
         ButtonComponent(
             value = stringResource(id = R.string.sign_up),
-            onclick = { PostOfficeAppRouter.navigateTo(Screens.LoginScreen) })
+            onclick = {  })
         SpacerComponent(20)
         NormalTextComponent(value = stringResource(R.string.or), TextAlign.Center)
         SpacerComponent(20)

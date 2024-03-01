@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun NormalTextComponent(value: String,textAlign: TextAlign) {
+fun NormalTextComponent(value: String, textAlign: TextAlign) {
     Text(
         text = value,
         modifier = Modifier.fillMaxWidth(),
@@ -57,29 +57,38 @@ fun SpacerComponent(size: Int) {
 fun TextFieldComponent(labelValue: String, value: String, onValueChange: (String) -> Unit) {
     TextField(
         value = value,
-        placeholder =  { Text(text = labelValue) },
-        onValueChange =  onValueChange ,
+        placeholder = { Text(text = labelValue) },
+        onValueChange = onValueChange,
         modifier = Modifier.fillMaxWidth(),
-        )
+    )
 
 }
 
 @Composable
-fun OutlineTextFieldCompent(labelValue: String, value: String, onValueChange: (String) -> Unit){
-    OutlinedTextField(value = value,
+fun OutlineTextFieldCompent(labelValue: String, value: String, onValueChange: (String) -> Unit) {
+    OutlinedTextField(
+        value = value,
         onValueChange = onValueChange,
-        placeholder =  {Text(text = labelValue)},
-        label = {Text(text = labelValue)},
+        placeholder = { Text(text = labelValue) },
+        label = { Text(text = labelValue) },
         modifier = Modifier.fillMaxWidth()
     )
 }
 
 @Composable
-fun OutlineTextFieldIconCompent(labelValue: String, value: String, onValueChange: (String) -> Unit, icon : ImageVector,isError: Boolean, errorText: String){
-    OutlinedTextField(value = value,
+fun OutlineTextFieldIconCompent(
+    labelValue: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    icon: ImageVector,
+    isError: Boolean,
+    errorText: String
+) {
+    OutlinedTextField(
+        value = value,
         onValueChange = onValueChange,
-        placeholder =  {Text(text = labelValue)},
-        label = {Text(text = labelValue)},
+        placeholder = { Text(text = labelValue) },
+        label = { Text(text = labelValue) },
         modifier = Modifier.fillMaxWidth(),
         leadingIcon = { Icon(imageVector = icon, contentDescription = "") },
         isError = isError
@@ -98,7 +107,7 @@ fun OutlineTextFieldIconCompent(labelValue: String, value: String, onValueChange
 
 
 @Composable
-fun ButtonComponent(value: String, onclick: ()-> Unit) {
+fun ButtonComponent(value: String, onclick: () -> Unit) {
     Button(onclick, modifier = Modifier.fillMaxWidth()) {
         Text(text = value)
     }
@@ -110,12 +119,12 @@ fun TextFieldBorder() {
     var text by remember { mutableStateOf("") }
     TextField(
         value = text,
-        onValueChange = {if (it.length <= maxChar)  text = it },
+        onValueChange = { if (it.length <= maxChar) text = it },
         Modifier
             .border(BorderStroke(1.dp, Color.Red), RectangleShape)
             .size(50.dp)
             .width(1.dp),
-        placeholder ={Text(text = "X")} ,
+        placeholder = { Text(text = "X") },
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         textStyle = TextStyle(textAlign = TextAlign.Center)
     )

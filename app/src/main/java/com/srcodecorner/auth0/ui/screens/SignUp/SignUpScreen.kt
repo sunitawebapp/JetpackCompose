@@ -22,66 +22,84 @@ import androidx.navigation.NavController
 import com.srcodecorner.auth0.R
 import com.srcodecorner.auth0.components.*
 import com.srcodecorner.auth0.navigation.PostOfficeAppRouter
+import com.srcodecorner.auth0.navigation.Screen
 import com.srcodecorner.auth0.navigation.Screens
 import com.srcodecorner.auth0.screens.auth.SignIn.SignInScreen
 import com.srcodecorner.auth0.screens.auth.SignIn.viewmodel.SignInViewModel
 import com.srcodecorner.auth0.screens.auth.SignUp.ViewModel.SignUpViewModel
+import com.srcodecorner.auth0.ui.screens.SignUp.state.SignUpFormEvent
 
 @Composable
 fun SignUpScreen(navController: NavController) {
-    var signUpViewModel : SignUpViewModel= viewModel()
+    var signUpViewModel: SignUpViewModel = viewModel()
 
 
-   var signUpState by remember {
-      signUpViewModel.signUpState
-   }
+    var signUpState by remember {
+        signUpViewModel.signUpState
+    }
 
 
 
     Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
+
+        if (signUpState.isSignUpSuccessful) {
+            navController.navigate(Screen.HomeScreen.route) {
+                popUpTo(Screen.LoginScreen.route) {
+                    inclusive = true
+                }
+            }
+        }
 
         HeadingTextComponent(value = stringResource(R.string.sign_up))
         NormalTextComponent(value = stringResource(R.string.create_your_account), TextAlign.Center)
         SpacerComponent(30)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.username),
-            value = signUpState.UsernameState,
-            onValueChange = {},
+            value = signUpState.usernameState,
+            onValueChange = {
+                signUpViewModel.uiEvent(SignUpFormEvent.UsernameChanged(it))
+            },
             icon = Icons.Default.Person,
-            false,
-            errorText =""
+            isError = signUpState.UsernameStateError,
+            errorText = ""
         )
         SpacerComponent(10)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.email),
             value = signUpState.emailState,
-            onValueChange = {},
+            onValueChange = {
+                signUpViewModel.uiEvent(SignUpFormEvent.EmailChanged(it))
+            },
             icon = Icons.Default.Email,
-            false,
-            errorText =""
+            isError = signUpState.emailStateError,
+            errorText = ""
         )
         SpacerComponent(10)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.password),
             value = signUpState.passwordState,
-            onValueChange = {},
+            onValueChange = {
+                signUpViewModel.uiEvent(SignUpFormEvent.PasswordChanged(it))
+            },
             icon = Icons.Default.Lock,
-            false,
-            errorText =""
+            isError = signUpState.passwordStateError,
+            errorText = ""
         )
         SpacerComponent(10)
         OutlineTextFieldIconCompent(
             labelValue = stringResource(id = R.string.confirm_password),
             value = signUpState.confirmPasswordState,
-            onValueChange = {},
+            onValueChange = {
+                signUpViewModel.uiEvent(SignUpFormEvent.ComfirmPasswordChanged(it))
+            },
             icon = Icons.Default.Lock,
-            false,
-            errorText =""
+            isError = signUpState.confirmPasswordStateError,
+            errorText = ""
         )
         SpacerComponent(50)
         ButtonComponent(
             value = stringResource(id = R.string.sign_up),
-            onclick = {  })
+            onclick = { signUpViewModel.uiEvent(SignUpFormEvent.Submit) })
         SpacerComponent(20)
         NormalTextComponent(value = stringResource(R.string.or), TextAlign.Center)
         SpacerComponent(20)

@@ -23,9 +23,15 @@ fun NewPasswordScreen(navController: NavController) {
     Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.Center) {
         HeadingTextComponent(value = stringResource(id = R.string.new_password))
         SpacerComponent(20)
-        TextFieldComponent(labelValue = stringResource(id = R.string.new_password),newPassword ,onValueChange = {})
+        TextFieldComponent(
+            labelValue = stringResource(id = R.string.new_password),
+            newPassword,
+            onValueChange = {})
         SpacerComponent(20)
-        TextFieldComponent(labelValue = stringResource(id = R.string.confirm_password),conformPassword, onValueChange = {})
+        TextFieldComponent(
+            labelValue = stringResource(id = R.string.confirm_password),
+            conformPassword,
+            onValueChange = {})
         SpacerComponent(20)
         ButtonComponent(value = stringResource(id = R.string.send)) {
 
@@ -33,7 +39,8 @@ fun NewPasswordScreen(navController: NavController) {
     }
 
 }
+
 @Composable
-fun NewPasswordScreenPreview(){
-  //  NewPasswordScreen()
+fun NewPasswordScreenPreview() {
+    //  NewPasswordScreen()
 }

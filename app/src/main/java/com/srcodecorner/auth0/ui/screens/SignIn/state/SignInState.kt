@@ -1,17 +1,17 @@
 package com.srcodecorner.auth0.ui.screens.SignIn.state
 
-data class SignInState (
-           var emailState : String="",
-           var passwordState : String ="",
+data class SignInState(
+    var emailState: String = "",
+    var passwordState: String = "",
 
-           var emailStateError : Boolean = false,
-           var passwordStateError : Boolean = false,
+    var emailStateError: Boolean = false,
+    var passwordStateError: Boolean = false,
 
-           var emailError : String = "",
+    var emailError: String = "",
 
-           val isLoginSuccessful: Boolean = false
-         /*  var emailError : String = "",
-           var passwordError : String = ""*/
+    val isLoginSuccessful: Boolean = false
+    /*  var emailError : String = "",
+      var passwordError : String = ""*/
 /*
            val email: String = "",
            val emailError: String? = null,
@@ -24,9 +24,9 @@ data class SignInState (
 )
 
 data class SignInStateError(
-    var emailStateError : Boolean = false,
-    var passwordStateError : Boolean = false,
-    var emailError : String = "",
-    var passwordError : String = ""
+    var emailStateError: Boolean = false,
+    var passwordStateError: Boolean = false,
+    var emailError: String = "",
+    var passwordError: String = ""
 
 )

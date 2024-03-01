@@ -6,7 +6,7 @@ import com.srcodecorner.auth0.ui.screens.SignIn.state.SignInState
 import com.srcodecorner.auth0.ui.screens.SignIn.state.SignInFormEvent
 
 
-class SignInViewModel  : ViewModel() {
+class SignInViewModel : ViewModel() {
     var signInState = mutableStateOf(SignInState())
 
 
@@ -33,7 +33,7 @@ class SignInViewModel  : ViewModel() {
 
     fun userSignIn() {
         if (isValidateUserSignIn()) {
-           // navigateToDestination()
+            // navigateToDestination()
             signInState.value = signInState.value.copy(isLoginSuccessful = true)
         }
     }

@@ -9,14 +9,14 @@ import com.srcodecorner.auth0.screens.auth.SignUp.SignUpScreen
 
 //
 @Composable
-fun PostOfficeApp(){
-    Crossfade(targetState =PostOfficeAppRouter.currentScreen ) { currentState->
-        when(currentState.value){
+fun PostOfficeApp() {
+    Crossfade(targetState = PostOfficeAppRouter.currentScreen) { currentState ->
+        when (currentState.value) {
             is Screens.LoginScreen -> {
                 //SignInScreen( )
             }
             is Screens.RegistrationScreen -> {
-               // SignUpScreen( )
+                // SignUpScreen( )
             }
         }
     }

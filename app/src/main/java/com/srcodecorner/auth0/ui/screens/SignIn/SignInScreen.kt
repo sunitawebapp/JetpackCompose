@@ -35,7 +35,6 @@ import com.srcodecorner.auth0.utils.Helper.showToast
 import com.srcodecorner.auth0.ui.screens.SignIn.state.SignInFormEvent
 
 
-
 @Composable
 fun SignInScreen(navController: NavController) {
     val signInViewModel: SignInViewModel = viewModel()
@@ -48,7 +47,7 @@ fun SignInScreen(navController: NavController) {
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center
     ) {
-        if (signInState.isLoginSuccessful){
+        if (signInState.isLoginSuccessful) {
             navController.navigate(Screen.HomeScreen.route)
             {
                 popUpTo(Screen.LoginScreen.route) {

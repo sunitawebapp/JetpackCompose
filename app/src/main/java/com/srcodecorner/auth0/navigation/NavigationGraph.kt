@@ -24,6 +24,7 @@ fun NavigationGraph(
     ){
         composable(route = Screen.LoginScreen.route) {
             SignInScreen(navController)
+
             //SignInScreen()
         }
         composable(route = Screen.RegistrationScreen.route) {
@@ -31,6 +32,7 @@ fun NavigationGraph(
         }
         composable(route = Screen.HomeScreen.route) {
             HomeScreen(navController)
+
         }
         composable(route = Screen.ForgotPasswordScreen.route) {
             ForgetPasswordScreen(navController)

@@ -21,7 +21,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.srcodecorner.auth0.AppModule.provideNavigationRepository
+
 import com.srcodecorner.auth0.R
 import com.srcodecorner.auth0.components.*
 import com.srcodecorner.auth0.navigation.NavigationGraph
@@ -50,6 +50,12 @@ fun SignInScreen(navController: NavController) {
     ) {
         if (signInState.isLoginSuccessful){
             navController.navigate(Screen.HomeScreen.route)
+            {
+                popUpTo(Screen.LoginScreen.route) {
+                    inclusive = true
+                }
+            }
+
         }
         HeadingTextComponent(value = stringResource(id = R.string.welcome_back))
         NormalTextComponent(

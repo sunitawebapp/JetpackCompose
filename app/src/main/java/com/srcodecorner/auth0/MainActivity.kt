@@ -2,56 +2,25 @@ package com.srcodecorner.auth0
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
-import android.view.View.OnClickListener
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.FocusRequester
+
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextRange
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
+
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.srcodecorner.auth0.app.PostOfficeApp
-import com.srcodecorner.auth0.components.*
 import com.srcodecorner.auth0.navigation.NavigationGraph
-import com.srcodecorner.auth0.navigation.Screens
-import com.srcodecorner.auth0.ui.screens.Home.HomeScreen
-import com.srcodecorner.auth0.screens.auth.SignIn.SignInScreen
-import com.srcodecorner.auth0.screens.auth.SignUp.SignUpScreen
-
 import com.srcodecorner.auth0.ui.theme.Auth0Theme
+import com.srcodecorner.auth0.utils.AppModule.provideNavController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,16 +44,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ScreenMain() {
+  /*  val navController = provideNavController()
+    NavigationGraph(navController)*/
+   // val navController = hiltViewModel<NavControllerViewModel>().navController
+   // NavigationGraph(navController)
+   // var navController = rememberNavController()
+
     NavigationGraph()
 }
-
-
-
-
-
-
-
-
 
 
 @Preview(showBackground = true)

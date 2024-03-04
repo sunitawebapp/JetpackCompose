@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.srcodecorner.auth0.R
@@ -28,8 +29,8 @@ import com.srcodecorner.auth0.ui.screens.SignIn.state.SignInFormEvent
 
 
 @Composable
-fun ForgetPasswordScreen(navController: NavController) {
-    val forgetpasswordviewmodel : ForgetPasswordViewModel = viewModel()
+fun ForgetPasswordScreen(navController: NavController,forgetpasswordviewmodel : ForgetPasswordViewModel = hiltViewModel()) {
+
 
     var forgetPasswordState by remember {
         forgetpasswordviewmodel.forgetPasswordState
@@ -59,8 +60,8 @@ fun ForgetPasswordScreen(navController: NavController) {
         )
         SpacerComponent(size = 50)
         ButtonComponent(value = stringResource(R.string.send)) {
-            //forgetpasswordviewmodel.onEvent(ForgetPasswordEvent.sendForVerify)
-            navController.navigate(Screen.VerificationScreen.route)
+            forgetpasswordviewmodel.onEvent(ForgetPasswordEvent.sendForVerify)
+           // navController.navigate(Screen.VerificationScreen.route)
         }
     }
 }

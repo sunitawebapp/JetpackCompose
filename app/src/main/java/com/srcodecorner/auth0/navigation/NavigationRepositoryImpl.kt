@@ -1,10 +1,17 @@
 package com.srcodecorner.auth0.navigation
 
+import android.util.Log
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import javax.inject.Inject
 
-class NavigationRepositoryImpl(var navController: NavController) : NavigationRepository {
+class NavigationRepositoryImpl @Inject constructor(private val navController: NavController) : NavigationRepository {
+    init {
+        Log.d("NavController", "NavController injected: ${navController}")
+    }
+
     override fun navigateTo(destination: String) {
-        // Implement navigation logic here if required
-        navController.navigate(destination)
+        Log.d("Navigation", "Attempting navigation to: $destination")
+       // navController?.navigate(destination)
     }
 }

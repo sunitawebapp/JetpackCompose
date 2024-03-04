@@ -13,10 +13,11 @@ import com.srcodecorner.auth0.ui.screens.Verification.VerificationScreen
 import com.srcodecorner.auth0.screens.auth.SignIn.SignInScreen
 import com.srcodecorner.auth0.screens.auth.SignUp.SignUpScreen
 
+/*
 
 @Composable
 fun NavigationGraph(
-    navController: NavHostController = rememberNavController(),
+    navController = rememberNavController()
 ) {
     NavHost(
         navController = navController,
@@ -47,5 +48,37 @@ fun NavigationGraph(
     }
 
 }
+*/
 
 
+@Composable
+fun NavigationGraph() {
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = Screen.LoginScreen.route
+    ) {
+        composable(route = Screen.LoginScreen.route) {
+            SignInScreen(navController)
+        }
+        composable(route = Screen.RegistrationScreen.route) {
+            SignUpScreen(navController)
+        }
+        composable(route = Screen.HomeScreen.route) {
+            HomeScreen(navController)
+
+        }
+        composable(route = Screen.ForgotPasswordScreen.route) {
+            ForgetPasswordScreen(navController)
+        }
+        composable(route = Screen.VerificationScreen.route) {
+            VerificationScreen(navController)
+        }
+        composable(route = Screen.NewPasswordScreen.route) {
+            NewPasswordScreen(navController)
+        }
+
+        // Define other screens here
+    }
+
+}

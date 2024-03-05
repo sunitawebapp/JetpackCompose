@@ -7,15 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.srcodecorner.auth0.R
@@ -26,6 +24,10 @@ import com.srcodecorner.auth0.ui.screens.Verification.VerificationScreen
 import com.srcodecorner.auth0.screens.auth.ForgetPassword.viewmodel.ForgetPasswordViewModel
 import com.srcodecorner.auth0.ui.screens.ForgetPassword.state.ForgetPasswordEvent
 import com.srcodecorner.auth0.ui.screens.SignIn.state.SignInFormEvent
+import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -35,8 +37,15 @@ fun ForgetPasswordScreen(navController: NavController,forgetpasswordviewmodel : 
     var forgetPasswordState by remember {
         forgetpasswordviewmodel.forgetPasswordState
     }
-
-
+   LaunchedEffect(key1 = ""){
+       forgetpasswordviewmodel.forgetPasswordEvent.asSharedFlow().collectLatest {  event->
+           when(event){
+               is ForgetPasswordEvent.NavigateEvent ->{
+                   navController.navigate(event.route)
+               }
+           }
+       }
+   }
 
     Column(
         modifier = Modifier

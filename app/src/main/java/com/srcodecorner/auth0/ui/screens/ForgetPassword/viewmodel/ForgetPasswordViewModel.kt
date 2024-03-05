@@ -3,6 +3,7 @@ package com.srcodecorner.auth0.screens.auth.ForgetPassword.viewmodel
 import androidx.compose.runtime.mutableStateOf
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.srcodecorner.auth0.navigation.NavigationRepository
 import com.srcodecorner.auth0.navigation.NavigationRepositoryImpl
@@ -10,12 +11,19 @@ import com.srcodecorner.auth0.navigation.Screen
 import com.srcodecorner.auth0.ui.screens.ForgetPassword.state.ForgetPasswordEvent
 import com.srcodecorner.auth0.ui.screens.ForgetPassword.state.ForgetPasswordState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
-class ForgetPasswordViewModel @Inject constructor(private val repository: NavigationRepository) : ViewModel(){
+class ForgetPasswordViewModel @Inject constructor() : ViewModel(){
     var forgetPasswordState = mutableStateOf(ForgetPasswordState())
+    var forgetPasswordEvent = MutableSharedFlow<ForgetPasswordEvent>()
+   private val  _eventFlow = MutableSharedFlow<ForgetPasswordEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
+
 
     fun onEvent(event: ForgetPasswordEvent){
         when(event){
@@ -24,19 +32,26 @@ class ForgetPasswordViewModel @Inject constructor(private val repository: Naviga
             }
             is ForgetPasswordEvent.sendForVerify ->{
                 sendVerify()
+
             }
         }
     }
 
     fun sendVerify(){
         if(isValidate()){
-            navigateTo(Screen.NewPasswordScreen.route)
+            navigateTo(Screen.VerificationScreen.route)
         }
 
     }
 
     fun navigateTo(destination: String) {
-        repository.navigateTo(destination)
+     viewModelScope.launch {
+         forgetPasswordEvent.emit( ForgetPasswordEvent.NavigateEvent(destination))
+     }
+
+
+
+
     }
 
     fun isValidate() : Boolean{
